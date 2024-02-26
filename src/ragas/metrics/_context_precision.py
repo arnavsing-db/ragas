@@ -73,14 +73,14 @@ class ContextPrecision(MetricWithLLM):
     context_precision_prompt: Prompt = field(default_factory=lambda: CONTEXT_PRECISION)
 
     def _get_row_attributes(self, row: t.Dict) -> t.Tuple[str, t.List[str], t.Any]:
-        answer = "ground_truth"
-        if answer not in row.keys():
-            logger.warning(
-                "Using 'context_precision' without ground truth will be soon depreciated. Use 'context_utilization' instead"
-            )
-            answer = "answer"
+        # answer = "ground_truth"
+        # if answer not in row.keys():
+        #     logger.warning(
+        #         "Using 'context_precision' without ground truth will be soon depreciated. Use 'context_utilization' instead"
+        #     )
+        #     answer = "answer"
 
-        return row["question"], row["contexts"], row[answer]
+        return row["question"], row["contexts"]#, row[answer]
 
     def _context_precision_prompt(self, row: t.Dict) -> t.List[PromptValue]:
         question, contexts, answer = self._get_row_attributes(row)
@@ -158,10 +158,10 @@ class ContextPrecision(MetricWithLLM):
 @dataclass
 class ContextUtilization(ContextPrecision):
     name: str = "context_utilization"
-    evaluation_mode: EvaluationMode = EvaluationMode.qac
+    evaluation_mode: EvaluationMode = EvaluationMode.qc
 
     def get_dataset_attributes(self, dataset: Dataset):
-        return dataset["question"], dataset["contexts"], dataset["answer"]
+        return dataset["question"], dataset["contexts"]#, dataset["answer"]
 
 
 context_precision = ContextPrecision()
