@@ -83,7 +83,7 @@ class ContextPrecision(MetricWithLLM):
         return row["question"], row["contexts"]#, row[answer]
 
     def _context_precision_prompt(self, row: t.Dict) -> t.List[PromptValue]:
-        question, contexts, answer = self._get_row_attributes(row)
+        question, contexts = self._get_row_attributes(row) #answer
         return [
             self.context_precision_prompt.format(
                 question=question, context=c
