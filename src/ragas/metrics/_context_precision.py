@@ -86,10 +86,10 @@ class ContextPrecision(MetricWithLLM):
         question, contexts, answer = self._get_row_attributes(row)
         return [
             self.context_precision_prompt.format(
-                question=question, context=c, answer=answer
+                question=question, context=c
             )
             for c in contexts
-        ]
+        ] #, answer=answer
 
     def _calculate_average_precision(self, json_responses: t.List[t.Dict]) -> float:
         score = np.nan
