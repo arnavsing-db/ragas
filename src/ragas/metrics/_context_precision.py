@@ -149,11 +149,16 @@ class ContextPrecision(MetricWithLLM):
                 for i in range(len(verdict_list))
             ]
         )
-        score = numerator / denominator
+        if np.isnan(numerator) or np.isnan(denominator):
+            score = 0
+        else:
+            score = numerator / denominator
+        print(numerator, denominator, score)
         if np.isnan(score):
             logger.warning(
                 "Invalid response format. Expected a list of dictionaries with keys 'verdict'"
             )
+        
         return score
 
     async def _ascore(
