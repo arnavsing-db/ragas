@@ -291,4 +291,5 @@ class Result(dict):
     def __repr__(self) -> str:
         scores = self.copy()
         score_strs = [f"'{k}': {v:0.4f}" for k, v in scores.items()]
+        
         return "{" + ", ".join(score_strs) + "}"
