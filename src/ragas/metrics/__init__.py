@@ -3,10 +3,10 @@ from ragas.metrics._answer_relevance import AnswerRelevancy, answer_relevancy
 from ragas.metrics._answer_similarity import AnswerSimilarity, answer_similarity
 from ragas.metrics._context_precision import (
     ContextPrecision,
-    ContextPrecisionNoAnswer,
+    ContextUtilizationNoAnswer,
     ContextUtilization,
     context_precision,
-    context_precision_no_answer,
+    context_utilization_no_answer,
     context_utilization,
 )
 from ragas.metrics._context_recall import ContextRecall, context_recall
@@ -23,8 +23,8 @@ __all__ = [
     "answer_similarity",
     "ContextPrecision",
     "context_precision",
-    "ContextPrecisionNoAnswer",
-    "context_precision_no_answer",
+    "ContextUtilizationNoAnswer",
+    "context_utilization_no_answer",
     "ContextUtilization",
     "context_utilization",
     "ContextRecall",

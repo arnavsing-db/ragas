@@ -205,13 +205,13 @@ class ContextPrecisionNoAnswer(MetricWithLLM):
 
     name: str = "context_precision_no_answer"  # type: ignore
     evaluation_mode: EvaluationMode = EvaluationMode.qcg  # type: ignore
-    context_precision_prompt: Prompt = field(default_factory=lambda: CONTEXT_PRECISION)
+    context_precision_no_answer_prompt: Prompt = field(default_factory=lambda: CONTEXT_PRECISION_NO_ANSWER)
 
     def _get_row_attributes(self, row: t.Dict) -> t.Tuple[str, t.List[str], t.Any]:
         # answer = "ground_truth"
         # if answer not in row.keys():
         #     logger.warning(
-        #         "Using 'context_precision' without ground truth will be soon depreciated. Use 'context_utilization' instead"
+        #         "Using 'context_precision_no_answer' without ground truth will be soon depreciated. Use 'context_utilization' instead"
         #     )
         #     answer = "answer"
 
@@ -308,7 +308,7 @@ class ContextUtilization(ContextPrecision):
 
 @dataclass
 class ContextUtilizationNoAnswer(ContextPrecisionNoAnswer):
-    name: str = "context_utilization"
+    name: str = "context_utilization_no_answer"
     evaluation_mode: EvaluationMode = EvaluationMode.qc
 
     def get_dataset_attributes(self, dataset: Dataset):
