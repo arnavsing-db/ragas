@@ -220,7 +220,7 @@ class ContextPrecisionNoAnswer(MetricWithLLM):
     def _context_precision_prompt_no_answer(self, row: t.Dict) -> t.List[PromptValue]:
         question, contexts = self._get_row_attributes(row) #answer
         return [
-            self._context_precision_prompt_no_answer.format(
+            self.context_precision_prompt_no_answer.format(
                 question=question, context=c
             )
             for c in contexts
