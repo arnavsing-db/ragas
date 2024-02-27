@@ -200,7 +200,7 @@ class ContextPrecisionNoAnswer(MetricWithLLM):
     ----------
     name : str
     evaluation_mode: EvaluationMode
-    context_precision_prompt: Prompt
+    context_precision_no_answer_prompt: Prompt
     """
 
     name: str = "context_precision_no_answer"  # type: ignore
@@ -220,7 +220,7 @@ class ContextPrecisionNoAnswer(MetricWithLLM):
     def _context_precision_prompt_no_answer(self, row: t.Dict) -> t.List[PromptValue]:
         question, contexts = self._get_row_attributes(row) #answer
         return [
-            self.context_precision_prompt_no_answer.format(
+            self.context_precision_no_answer_prompt.format(
                 question=question, context=c
             )
             for c in contexts
@@ -291,12 +291,12 @@ class ContextPrecisionNoAnswer(MetricWithLLM):
         assert self.llm is not None, "LLM is not set"
 
         logging.info(f"Adapting Context Precision to {language}")
-        self.context_precision_prompt_no_answer = self.context_precision_prompt_no_answer.adapt(
+        self.context_precision_no_answer_prompt = self.context_precision_no_answer_prompt.adapt(
             language, self.llm, cache_dir
         )
 
     def save(self, cache_dir: str | None = None) -> None:
-        self.context_precision_prompt_no_answer.save(cache_dir)
+        self.context_precision_no_answer_prompt.save(cache_dir)
 
 @dataclass
 class ContextUtilization(ContextPrecision):
